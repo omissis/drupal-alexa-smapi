@@ -1,0 +1,31 @@
+parameters:
+  omissis.alexa_sdk.http_client.class: Buzz\Client\FileGetContents
+  omissis.alexa_sdk.http_request_factory.class: Nyholm\Psr7\Factory\Psr17Factory
+  omissis.alexa_sdk.serializer.class: Omissis\AlexaSdk\Serializer\Symfony\SymfonySerializerAdapter
+  omissis.alexa_sdk.deserializer.class: Omissis\AlexaSdk\Serializer\Symfony\SymfonyDeserializerAdapter
+
+services:
+  omissis.alexa_sdk.http_client:
+    class: '%omissis.alexa_sdk.http_client.class%'
+
+  omissis.alexa_sdk.http_request_factory:
+    class: '%omissis.alexa_sdk.http_request_factory.class%'
+
+  omissis.alexa_sdk.serializer:
+    class: '%omissis.alexa_sdk.serializer.class%'
+
+  omissis.alexa_sdk.deserializer:
+    class: '%omissis.alexa_sdk.deserializer.class%'
+
+  omissis.alexa_sdk.sdk_factory:
+    class: Drupal\alexa_smapi\SdkFactory
+    arguments:
+      $client: '@omissis.alexa_sdk.http_client'
+      $request_factory: '@omissis.alexa_sdk.http_request_factory'
+      $serializer: '@omissis.alexa_sdk.serializer'
+      $deserializer: '@omissis.alexa_sdk.deserializer'
+      $config_factory: '@config.factory'
+
+  omissis.alexa_sdk.sdk:
+    class: Omissis\AlexaSdk\Sdk
+    factory: omissis.alexa_sdk.sdk_factory:get
