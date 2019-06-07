@@ -7,6 +7,7 @@ parameters:
 services:
   omissis.alexa_sdk.http_client:
     class: '%omissis.alexa_sdk.http_client.class%'
+    arguments: ['@omissis.alexa_sdk.http_request_factory']
 
   omissis.alexa_sdk.http_request_factory:
     class: '%omissis.alexa_sdk.http_request_factory.class%'

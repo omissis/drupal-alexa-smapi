@@ -4,6 +4,7 @@ namespace Drupal\alexa_smapi;
 
 use Drupal\Core\Config\ConfigFactory;
 use Drupal\Core\Config\ImmutableConfig;
+use Omissis\AlexaSdk\Sdk;
 use Omissis\AlexaSdk\Serializer\Deserializer;
 use Omissis\AlexaSdk\Serializer\Serializer;
 use Psr\Http\Client\ClientInterface;
@@ -61,8 +62,8 @@ final class SdkFactory implements ContainerAwareInterface
       $this->request_factory,
       $this->serializer,
       $this->deserializer,
-      $this->config->get('api_base_url'),
-      $this->config->get('oauth_token')
+      (string) $this->config->get('api_base_url'),
+      new Sdk\OAuthToken((string) $this->config->get('oauth_token'), '')
     );
   }
 }

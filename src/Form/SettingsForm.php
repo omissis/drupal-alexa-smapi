@@ -35,30 +35,30 @@ final class SettingsForm extends ConfigFormBase
     $form['container']['api_base_url'] = [
       '#type' => 'url',
       '#title' => $this->t('API Base Url'),
-      '#default_value' => 'https://api.amazonalexa.com/v1',
-      '#value' => $this->config('alexa_smapi.settings')->get('api_base_url'),
+      '#attributes' => ['placeholder' => 'https://api.amazonalexa.com/v1'],
+      '#default_value' => $this->config('alexa_smapi.settings')->get('api_base_url') ?? 'https://api.amazonalexa.com/v1',
     ];
 
     $form['container']['skill_id'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Skill Id'),
       '#attributes' => ['placeholder' => 'amzn1.ask.skill.[...]'],
-      '#value' => $this->config('alexa_smapi.settings')->get('skill_id'),
+      '#default_value' => $this->config('alexa_smapi.settings')->get('skill_id'),
     ];
 
     $form['container']['stage'] = [
       '#type' => 'textfield', # todo: make this a select
       '#title' => $this->t('Stage'),
       '#attributes' => ['placeholder' => 'development'],
-      '#value' => $this->config('alexa_smapi.settings')->get('stage'),
+      '#default_value' => $this->config('alexa_smapi.settings')->get('stage') ?? 'development',
     ];
 
     $form['container']['oauth_token'] = [
       '#type' => 'textarea',
       '#title' => $this->t('OAuth Token'),
       '#attributes' => ['placeholder' => 'Atza|[...]'],
+      '#default_value' => $this->config('alexa_smapi.settings')->get('oauth_token'),
       '#description' => $this->t('Run <strong>make token</strong> in <strong>omissis/php-ask-sdk</strong> to obtain a token and paste it here.'),
-      '#value' => $this->config('alexa_smapi.settings')->get('oauth_token'),
     ];
 
     $form['submit'] = [
